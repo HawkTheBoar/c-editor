@@ -1,0 +1,11 @@
+#ifndef SCREEN_H
+#define SCREEN_H
+#define MAX_LINE_LENGTH 100
+#define MAX_LINES 256
+#include "input/cursor.h"
+
+void screen_init();
+
+void screen_render(char *buffer[MAX_LINES], Cursor *c, int max_line_length, int max_lines);
+
+#endif
