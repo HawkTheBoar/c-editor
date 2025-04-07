@@ -15,7 +15,7 @@ Cursor *cursor_create(int x, int y){
 }
 // returns TRUE if is out of borders ELSE FALSE
 static bool is_out_of_borders(int x, int y, char (*buffer)[MAX_LINE_LENGTH]){
-    return x > MAX_LINE_LENGTH && y > MAX_LINES && x < 0 && y < 0;
+    return x > MAX_LINE_LENGTH || y > MAX_LINES || x < 0 || y < 0;
 }
 int vertical_move_get_new_x(const Cursor *c, int new_y, char (*buffer)[MAX_LINE_LENGTH]){
     // todo

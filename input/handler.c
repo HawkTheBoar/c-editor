@@ -26,15 +26,23 @@ int handle_input(const int *input, Cursor *c, char (*buffer)[MAX_LINE_LENGTH]){
         case KEY_BACKSPACE:
             cursor_move_left(c, buffer);
             char *ch;
+            int i = 0;
             do{
-                ch = buffer[c->y]
-            } while(c != '\0');
+                ch = &buffer[c->y][c->x+i];
+                *ch = buffer[c->y][c->x+1+i];
+                i++;
+            } while(*ch != '\0');
+            break;
+        case KEY_ENTER:
+            printw("%s", "WTF");
             break;
         default:
             if(is_ascii(input)){
                 buffer_put_c(*input, c->x, c->y, buffer);
                 cursor_move_right(c, buffer);
             }
+            move(3, 2);
+            printw("Unhandled key: %d\n", *input);
             break;
     }
 }

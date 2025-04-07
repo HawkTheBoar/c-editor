@@ -30,6 +30,7 @@ void screen_render(char (*buffer)[MAX_LINE_LENGTH], Cursor *c, int max_line_leng
     // main
     for(int y = 0; y < max_lines; y++){
         move(y+OFFSET_Y, OFFSET_X);
+        
         printw("%s", buffer[y]);
     }
     // cursor
