@@ -41,8 +41,8 @@ int handle_input(const int *input, Cursor *c, char (*buffer)[MAX_LINE_LENGTH]){
                 buffer_put_c(*input, c->x, c->y, buffer);
                 cursor_move_right(c, buffer);
             }
-            move(3, 2);
-            printw("Unhandled key: %d\n", *input);
+            // move(3, 2);
+            // printw("Unhandled key: %d\n", *input);
             break;
     }
 }
