@@ -1,8 +1,13 @@
 #include "input/handler.h"
 #include "input/cursor.h"
 #include <ncurses.h>
-void buffer_put_c(int input, int x, int y, char (*buffer)[MAX_LINE_LENGTH]){
+#include "config.h"
+void write_ch(int input, int x, int y, char (*buffer)[MAX_LINE_LENGTH]){
     buffer[y][x] = input;
+}
+void write_ch_and_move_right(Cursor *c, int input, int x, int y, char (*buffer)[MAX_LINE_LENGTH]){
+    write_ch(input, x, y, buffer);
+    cursor_move_right(c, buffer);
 }
 bool is_ascii(const int *key){
     return *key >= 32 && *key <= 126;
@@ -33,12 +38,17 @@ int handle_input(const int *input, Cursor *c, char (*buffer)[MAX_LINE_LENGTH]){
                 i++;
             } while(*ch != '\0');
             break;
-        case KEY_ENTER:
-            printw("%s", "WTF");
+        case ENTER_KEY:
+            write_ch('\n', c->x, c->y, buffer);
+            cursor_move_down(c, buffer);
+            break;
+        case '\t':
+            for(int i = 0; i < TAB_SPACES; i++)
+                write_ch_and_move_right(c, ' ', c->x, c->y, buffer);
             break;
         default:
             if(is_ascii(input)){
-                buffer_put_c(*input, c->x, c->y, buffer);
+                write_ch(*input, c->x, c->y, buffer);
                 cursor_move_right(c, buffer);
             }
             // move(3, 2);

@@ -5,6 +5,6 @@
 
 void screen_init();
 
-void screen_render(char (*buffer)[MAX_LINE_LENGTH], Cursor *c, int max_line_length, int max_lines);
+void screen_render(char (*buffer)[MAX_LINE_LENGTH], Cursor *c, int max_line_length, int max_lines, char *title);
 
 #endif
