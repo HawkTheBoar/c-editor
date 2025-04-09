@@ -29,6 +29,7 @@ int read_file(char *filename, char (*buffer)[MAX_LINE_LENGTH]){
             return 1;
         }
         fclose(in);
+        in = fopen(filename, "r");
     }
     char line[MAX_LINE_LENGTH];
     int lineCount = 0;
